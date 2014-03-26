@@ -1,10 +1,14 @@
 language: php
 
 php:
-  - 5.3.3
   - 5.3
   - 5.4
 
-before_script: composer install -n
+before_script:
+  - composer install --dev
 
-script: phpunit -c app
+script: phpunit --coverage-text
+
+notifications:
+  email:
+    - guitouzid@easy-company.fr
