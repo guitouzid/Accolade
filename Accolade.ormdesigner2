@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<orm-designer version="2.3.4.871" name="Accolade" mvc="Symfony2" orm="Doctrine2" uuid="01382da1-105d-4a4c-87af-38f25fc6309e">
+  <module name="AccoladeCRM" import-format="Doctrine2Php" import-path="orm" uuid="50d8921e-3e8f-4233-a375-2529fa3ba5a2">
+    <entity name="TypePersonne" uuid="f9bfc09f-7a75-4ae8-a0ae-ae3ff67b33f8">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="fe5884f6-d47f-4e3d-9142-c2b269efc58c"/>
+      <field name="nom" required="true" uuid="6248d8dd-5881-46a0-9ba8-e49d004c7852"/>
+    </entity>
+    <entity name="Ticket" uuid="e4bbf818-e3d7-4be9-8aa0-bd888b460083">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="2bf1d59a-f8be-4828-b0b6-26b1fb8f4fce"/>
+      <field name="titre" type="string" required="true" uuid="cc56e570-b9b1-440a-992f-025c78ecad72"/>
+      <field name="description" type="text" required="true" uuid="b65c0e2e-05a0-46df-98a6-80483f109343"/>
+      <field name="date_creation" type="datetime" required="true" uuid="550f1006-a5c2-4d2e-b422-53bbf4641f4d"/>
+      <field name="date_cloture" type="datetime" uuid="b7d150c2-b4b1-4de9-a184-8f9e3635f453"/>
+      <field name="type_ticket_id" type="integer" required="true" uuid="fbf93365-8f97-4f7e-b9eb-753ea83e7777"/>
+      <field name="etat_ticket_id" type="integer" required="true" uuid="0848be80-e09f-4559-97ea-ba6e1b6b6b72"/>
+    </entity>
+    <association from="Ticket" to="TypeTicket" caption="TypeTicket Ticket" owner-alias="tickets" inverse-alias="typeTicket" uuid="26e24b75-7d57-448a-b2bf-f4b22cf45ad8">
+      <association-field from="type_ticket_id" to="id"/>
+    </association>
+    <association from="Ticket" to="EtatTicket" caption="EtatTicket Ticket" owner-alias="tickets" inverse-alias="etatTicket" uuid="7d042466-5752-4c9e-82ed-2696be0e8f4e">
+      <association-field from="etat_ticket_id" to="id"/>
+    </association>
+    <entity name="TypeTicket" uuid="b34126dc-3422-49e0-bc65-6d2a1c14448d">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="b798fd52-79ef-4c36-98b7-4bf186011950"/>
+      <field name="nom" type="string" required="true" uuid="e212d6e3-32b4-46f8-b097-afabbeb4252c"/>
+    </entity>
+    <entity name="Facture" uuid="eb05e4b5-a8c8-48c7-afb3-353a7c2ac0f0">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="1a79b6ac-f025-4872-af9d-60619f9b122d"/>
+      <field name="date_creation" type="datetime" required="true" uuid="5d8f722a-4062-49f3-afe8-3cf7f831fc87"/>
+    </entity>
+    <entity name="TypePrestation" uuid="62e980a5-4919-4832-a7e3-b9a781115c88">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="cefffa7a-cf26-4c9b-833e-2a7009ff5f22"/>
+      <field name="nom" type="string" required="true" uuid="d8d09fba-f2be-493d-96af-bf1cb04cbf1d"/>
+    </entity>
+    <entity name="Prestation" uuid="1eb8d263-9639-495b-9e47-ba02af0baaf6">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="7fe64848-b805-4c1c-aa08-8f9f60b20c4e"/>
+      <field name="nom" type="string" required="true" uuid="ef4cf539-c572-4670-a248-19e47ebc77fb"/>
+      <field name="description" type="text" uuid="88a00d4a-b655-44ee-a2e2-4e3287d62e24"/>
+      <field name="temps_prevu" type="integer" uuid="41828203-b320-45e5-9d2a-233b3042f4d7"/>
+      <field name="date_ajout" type="datetime" required="true" uuid="403392b4-f431-4956-b1d9-74c655bed47e"/>
+      <field name="date_debut" type="datetime" uuid="008ae8a7-4b3b-40d6-95eb-502e6dd842bb"/>
+      <field name="date_fin" type="datetime" uuid="41f66985-f332-4c69-9343-48321808ebdb"/>
+      <field name="pourcentage_avancement" type="integer" size="2" default="0" required="true" uuid="c5e4fa54-8344-4797-aa4a-618fbc050e10"/>
+      <field name="est_terminee" type="boolean" default="0" required="true" uuid="d393e51a-07b4-4509-bbb2-461d390acaaa"/>
+      <field name="type_prestation_id" type="integer" required="true" uuid="fb21d03c-3936-4635-ab4e-da3ede665cfc"/>
+      <field name="projet_id" type="integer" required="true" uuid="449fbe3b-8b60-4b61-870b-6a3c76bb95dd"/>
+      <field name="etat_prestation_id" type="integer" required="true" uuid="cb2b778e-f256-48f9-9356-965ece528a54"/>
+    </entity>
+    <association from="Prestation" to="TypePrestation" caption="TypePrestation Prestation" owner-alias="prestations" inverse-alias="typePrestation" uuid="8d51a112-ca9e-45ff-a2e2-d5073316845d">
+      <association-field from="type_prestation_id" to="id"/>
+    </association>
+    <association from="Prestation" to="Projet" caption="Projet Prestation" owner-alias="prestations" inverse-alias="projet" uuid="c22fbfd0-fd72-46d2-8936-7066e6ae59a1">
+      <association-field from="projet_id" to="id"/>
+    </association>
+    <association from="Prestation" to="EtatPrestation" caption="EtatPrestation Prestation" owner-alias="prestation" inverse-alias="etatPrestation" uuid="214f5614-99c7-488e-af04-07bf7409912d">
+      <association-field from="etat_prestation_id" to="id"/>
+    </association>
+    <entity name="Intervention" uuid="6c97c5e3-74ef-4608-8f33-6aff9dafb997">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="504e3169-e5dd-4460-84d0-709e99ff60ef"/>
+      <field name="nom" type="string" required="true" uuid="a17b8098-bd81-4ef4-b9da-a6744eceba6d"/>
+      <field name="description" type="text" uuid="35bbbbd8-f448-4db7-ac16-609ea904d78b"/>
+      <field name="duree" type="integer" required="true" uuid="c964fb9e-88e3-41cc-b1ca-99a54040c245"/>
+      <field name="date_creation" type="datetime" required="true" uuid="ff8eaf65-b30a-47fb-bee3-1248391114bd"/>
+      <field name="prestation_id" type="integer" required="true" uuid="f98a01a1-7e2f-4496-9d62-2745e94bcd38"/>
+    </entity>
+    <association from="Intervention" to="Prestation" caption="Prestation Intervention" owner-alias="interventions" inverse-alias="prestation" uuid="06ba008e-02c3-49a1-bce1-a0a42b6d2158">
+      <association-field from="prestation_id" to="id"/>
+    </association>
+    <entity name="Personne" uuid="5ccf25cf-ebb4-4389-9689-759c5b3b9a72">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="48131da5-66a2-4ce8-ae0e-0ad9c0a9175f"/>
+      <field name="nom" type="string" required="true" uuid="b3c357b9-4fcc-4c2e-ad6f-875645f2665a"/>
+      <field name="prenom" type="string" required="true" uuid="6180eb71-1d33-4717-a3a8-55192241e69e"/>
+      <field name="login" type="string" required="true" uuid="4a55674c-a595-4a5a-bec3-4c8ad5b75370"/>
+      <field name="mot_de_passe" type="string" required="true" uuid="13feb7c6-55b5-4aa9-90cb-5059483cba05"/>
+      <field name="email" type="string" uuid="5f8f8f86-28b9-4c47-9d93-ec4b99cfa480"/>
+      <field name="telephone_fixe" type="string" uuid="0762b2f8-87c0-4b8d-98fd-7656e5a463e5"/>
+      <field name="telephone_portable" type="string" uuid="23ed1ea2-44eb-4585-9319-a13dbae7d52b"/>
+      <field name="fax" type="string" uuid="28cb5b21-44c1-45d1-867c-29319a50cf28"/>
+      <field name="type_personne_id" type="integer" required="true" uuid="2bed18ac-89dc-46c0-a138-450f2867ac70"/>
+    </entity>
+    <association from="Personne" to="TypePersonne" caption="TypePersonne Personne" owner-alias="personnes" inverse-alias="typePersonne" uuid="48f28172-7b02-49ee-8461-e56e54d5b72e">
+      <association-field from="type_personne_id" to="id"/>
+    </association>
+    <entity name="Projet" uuid="7e93393a-acfb-42e5-ae11-e26a99945d25">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="1215a7de-fc29-4703-ac66-9aa61aee3344"/>
+      <field name="nom" type="string" required="true" uuid="14189ee5-860f-4d79-a1da-c21b344c7c49"/>
+      <field name="description" type="text" uuid="89fc2197-ee0b-4d31-b953-8fabdc138df7"/>
+      <field name="personne_id" type="integer" required="true" uuid="9e89eb70-cca1-4ff3-99d6-e26ef5860e77"/>
+    </entity>
+    <association from="Projet" to="Personne" caption="Personne Projet" owner-alias="projets" inverse-alias="personne" uuid="6bac1cc2-e86f-4d02-85b8-c96013c3b1a6">
+      <association-field from="personne_id" to="id"/>
+    </association>
+    <entity name="EtatTicket" uuid="b3c1bcd6-ed4a-4d9b-902b-473da3948c5d">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="e385610c-cbdd-4cd4-a2f1-21d61e96624f"/>
+      <field name="nom" type="string" required="true" uuid="da9f4912-12f5-463b-8348-a1cf5b5325e2"/>
+    </entity>
+    <entity name="EtatPrestation" uuid="9768fe6e-039d-43e6-b4f2-2c500e3063bc">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="a3c44f31-449b-47b6-89d6-0d320543d0e3"/>
+      <field name="nom" required="true" uuid="3bc80830-7ee2-4f84-addf-0476f8581a28"/>
+    </entity>
+    <entity name="LigneFacture" uuid="82094673-c1c6-46ff-aa4e-533a76e60079">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="1780678b-cdf2-48df-9c3a-da75fab58c33"/>
+      <field name="nom" type="string" required="true" uuid="89c2a587-4846-4a8f-99d6-5d27acd73229"/>
+      <field name="prix_unitaire_ht" type="integer" required="true" uuid="4cbb7be1-8dbb-462c-b4fa-a0c3f916cdf0"/>
+      <field name="quantite" type="integer" required="true" uuid="47e03b09-0f63-46bc-a3f6-17f98d7ff628"/>
+      <field name="facture_id" type="integer" required="true" uuid="0662852f-b860-4d78-9095-6aa403b980f6"/>
+      <field name="prestation_id" type="integer" uuid="d7809f26-d4f2-4580-a646-173ec25351ab"/>
+    </entity>
+    <association from="LigneFacture" to="Facture" caption="Facture LigneFacture" owner-alias="ligneFactures" inverse-alias="facture" uuid="24675a14-9774-492b-83c2-400d847b8994">
+      <association-field from="facture_id" to="id"/>
+    </association>
+    <association from="LigneFacture" to="Prestation" caption="Prestation LigneFacture" owner-alias="ligneFactures" inverse-alias="prestation" uuid="d206b6f6-5ec0-4d66-a2fc-7d158bd4e9c8">
+      <association-field from="prestation_id" to="id"/>
+    </association>
+    <entity name="Probleme" uuid="db3065b1-9b4c-4b57-ae25-c2e2c1731c95">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="c1075431-4257-4050-bbcb-4f155c112018"/>
+      <field name="nom" type="string" required="true" uuid="ab8e38f1-a057-424e-b683-b3da4f5e26c8"/>
+      <field name="description" type="text" required="true" uuid="dbd3be4e-6490-4dd5-99c5-e0999ff9b297"/>
+      <field name="type_probleme_id" type="integer" required="true" uuid="c1520d0c-32f7-42a0-8244-d2d2aa49c789"/>
+      <field name="projet_id" type="integer" required="true" uuid="cc14a202-6bf9-48d3-a1b1-88ee30d6a89b"/>
+    </entity>
+    <association from="Probleme" to="TypeProbleme" caption="TypeProbleme Probleme" owner-alias="probleme" inverse-alias="typeProbleme" uuid="09f0dc19-4262-4ec8-8a5b-30677a027ba4">
+      <association-field from="type_probleme_id" to="id"/>
+    </association>
+    <association from="Probleme" to="Projet" caption="Projet Probleme" owner-alias="probleme" inverse-alias="projet" uuid="a56b80a2-dbf7-4fe4-af12-d7e98f047d2e">
+      <association-field from="projet_id" to="id"/>
+    </association>
+    <entity name="TypeProbleme" uuid="5adf5106-fbc4-4d3c-b731-4ad1f2bfcb01">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="4708b932-c2ed-4b3c-8c3f-7d8dfd5d5488"/>
+      <field name="nom" required="true" uuid="33673f3d-0a52-4ece-b280-36449f447219"/>
+    </entity>
+    <entity name="PointBilan" uuid="cef8195a-bc16-4908-8d2f-d32c2242a640">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="4750974d-f5ab-4431-a674-21824d7f38bd"/>
+      <field name="numero" type="integer" required="true" uuid="dd98be9a-5919-488e-863e-24c7d022ed9b"/>
+      <field name="date_creation" type="datetime" required="true" uuid="4e9f771a-3162-4abe-bcbe-ad8a2a452af5"/>
+      <field name="date_prochain" type="datetime" uuid="abfde4b1-70f8-4302-9031-16f7fcb9d4cd"/>
+    </entity>
+    <entity name="LignePointBilan" uuid="4011db20-7c10-4b81-884b-dc27889bb2d4">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="a3a59b23-dbd1-4faf-afa8-87a53876513b"/>
+      <field name="nom" type="string" required="true" uuid="da6a54f6-f995-4784-9d5f-d862b1ed3fe3"/>
+      <field name="description" type="text" required="true" uuid="0f578422-36d8-40f6-ba2c-3f6b335ce8e3"/>
+      <field name="responsable" type="string" required="true" uuid="8e25e8e4-da5f-4874-bfce-b929de2e2903"/>
+      <field name="date_debut" type="datetime" required="true" uuid="f7f8ac45-c0b6-44aa-a4fc-423f3d890965"/>
+      <field name="date_fin" type="datetime" uuid="8825d9de-c84b-4ebb-b341-e52375271aa8"/>
+      <field name="point_bilan_id" type="integer" required="true" uuid="bbe1bab5-5d58-456d-9e9a-337283d91554"/>
+      <field name="priorite_id" type="integer" required="true" uuid="d66ba5d2-1933-4b8f-b55c-dfc4d2989b97"/>
+    </entity>
+    <association from="LignePointBilan" to="Priorite" caption="Priorite LignePointBilan" owner-alias="lignePointBilans" inverse-alias="priorite" uuid="22ba5f26-475b-40a7-8d33-58ed077b5b58">
+      <association-field from="priorite_id" to="id"/>
+    </association>
+    <association from="LignePointBilan" to="PointBilan" caption="PointBilan LignePointBilan" owner-alias="lignePointBilans" inverse-alias="pointBilan" uuid="d1b9738f-da25-4801-b436-c20e9052b443">
+      <association-field from="point_bilan_id" to="id"/>
+    </association>
+    <entity name="Priorite" uuid="fbc472f6-8a4c-41c3-9c04-946fa1174b4d">
+      <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="60b83da8-eae6-4e79-b535-c44f8579ae20"/>
+      <field name="nom" required="true" uuid="a4b174d7-38b4-45db-81a5-5d7213308566"/>
+    </entity>
+    <orm-attributes>
+      <attribute name="filename-format">entity-name-only</attribute>
+      <attribute name="namespace">AccoladeCRM\IntranetBundle</attribute>
+    </orm-attributes>
+  </module>
+  <visual-data>
+    <project uuid="01382da1-105d-4a4c-87af-38f25fc6309e" size-x="89" size-x2="1312" size-y="63" size-y2="1058"/>
+    <association uuid="09f0dc19-4262-4ec8-8a5b-30677a027ba4" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0"/>
+    <entity uuid="1eb8d263-9639-495b-9e47-ba02af0baaf6" position-x="516" position-y="190" size-x="0" size-x2="139" size-y="0" size-y2="171"/>
+    <entity uuid="4011db20-7c10-4b81-884b-dc27889bb2d4" position-x="790" position-y="757" size-x="0" size-x2="118" size-y="0" size-y2="129"/>
+    <module uuid="50d8921e-3e8f-4233-a375-2529fa3ba5a2" bk-color="4293454056" position-x="10" position-y="-13" size-x="49" size-x2="1241" size-y="48" size-y2="1021"/>
+    <entity uuid="5adf5106-fbc4-4d3c-b731-4ad1f2bfcb01" position-x="831" position-y="-28" size-x="0" size-x2="71" size-y="0" size-y2="45"/>
+    <entity uuid="5ccf25cf-ebb4-4389-9689-759c5b3b9a72" position-x="1085" position-y="204" size-x="0" size-x2="136" size-y="0" size-y2="157"/>
+    <entity uuid="62e980a5-4919-4832-a7e3-b9a781115c88" position-x="445" position-y="59" size-x="0" size-x2="75" size-y="0" size-y2="45"/>
+    <entity uuid="6c97c5e3-74ef-4608-8f33-6aff9dafb997" position-x="544" position-y="442" size-x="0" size-x2="126" size-y="0" size-y2="101"/>
+    <entity uuid="7e93393a-acfb-42e5-ae11-e26a99945d25" position-x="813" position-y="252" size-x="0" size-x2="112" size-y="0" size-y2="73"/>
+    <entity uuid="82094673-c1c6-46ff-aa4e-533a76e60079" position-x="383" position-y="428" size-x="0" size-x2="125" size-y="0" size-y2="101"/>
+    <entity uuid="9768fe6e-039d-43e6-b4f2-2c500e3063bc" position-x="663" position-y="60" size-x="0" size-x2="71" size-y="0" size-y2="45"/>
+    <entity uuid="b34126dc-3422-49e0-bc65-6d2a1c14448d" position-x="373" position-y="559" size-x="0" size-x2="75" size-y="0" size-y2="45"/>
+    <entity uuid="b3c1bcd6-ed4a-4d9b-902b-473da3948c5d" position-x="623" position-y="729" size-x="0" size-x2="75" size-y="0" size-y2="45"/>
+    <entity uuid="cef8195a-bc16-4908-8d2f-d32c2242a640" position-x="785" position-y="618" size-x="0" size-x2="128" size-y="0" size-y2="73"/>
+    <association uuid="d206b6f6-5ec0-4d66-a2fc-7d158bd4e9c8" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="15"/>
+    <entity uuid="db3065b1-9b4c-4b57-ae25-c2e2c1731c95" position-x="800" position-y="107" size-x="0" size-x2="136" size-y="0" size-y2="87"/>
+    <entity uuid="e4bbf818-e3d7-4be9-8aa0-bd888b460083" position-x="348" position-y="694" size-x="0" size-x2="126" size-y="0" size-y2="115"/>
+    <entity uuid="eb05e4b5-a8c8-48c7-afb3-353a7c2ac0f0" position-x="121" position-y="454" size-x="0" size-x2="126" size-y="0" size-y2="45"/>
+    <entity uuid="f9bfc09f-7a75-4ae8-a0ae-ae3ff67b33f8" position-x="1116" position-y="67" size-x="0" size-x2="71" size-y="0" size-y2="45"/>
+    <entity uuid="fbc472f6-8a4c-41c3-9c04-946fa1174b4d" position-x="816" position-y="956" size-x="0" size-x2="69" size-y="0" size-y2="45"/>
+  </visual-data>
+</orm-designer>

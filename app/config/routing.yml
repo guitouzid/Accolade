@@ -1,0 +1,4 @@
+accolade_crm_intranet:
+    resource: "@AccoladeCRMIntranetBundle/Resources/config/routing.yml"
+    prefix:   /
+
