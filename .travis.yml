@@ -7,7 +7,7 @@ php:
 before_script:
   - composer install --dev
 
-script: phpunit -c app/
+script: phpunit
 
 notifications:
   email:
